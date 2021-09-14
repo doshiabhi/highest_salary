@@ -1,0 +1,27 @@
+**********table********
+
+CREATE TABLE employee (
+    dept varchar(255),
+    firstname varchar(255),
+    salary int
+);
+
+*******table values**********
+
+insert into employee values ('audit','rahul',25000);
+insert into employee values ('audit','ravi',26000);
+insert into employee values ('audit','rishi',27000);
+insert into employee values ('marketing','rohit',15000);
+insert into employee values ('marketing','varun',18000);
+insert into employee values ('marketing','abhi',14000);
+insert into employee values ('sales','alan',7000);
+insert into employee values ('sales','donald',80000);
+insert into employee values ('sales','vipin',31000);
+
+***********highest salary***********
+
+select dept, firstname, salary 
+from (
+select *, rank() over(partition by dept order by salary desc) as rank
+from employee) a
+where rank = 1
